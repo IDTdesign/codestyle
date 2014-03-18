@@ -242,15 +242,15 @@ Another example, when typography definitions may apply for layouting:
 /* 1. Text-align used for layouting inner elements */
 
 .sample-3-outer {
-  display: block;
-  text-align: justify; /* 1 */
+    display: block;
+    text-align: justify; /* 1 */
 }
 
 /* 2. Vertical-align affects layout, so it is box-model definition, not typography */
 
 .sample-3-inner {
-  display: inline-block;
-  vertical-align: middle; /* 2 */
+    display: inline-block;
+    vertical-align: middle; /* 2 */
 }
 
 ```
