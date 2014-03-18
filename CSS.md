@@ -15,6 +15,8 @@ This document defines formatting and style rules for CSS. It aims at improving c
 * Use 4 spaces for indents.
 * Never mix spaces and tabs for indentation.
 * Remove end-of-line whitespace.
+* Set encoding to UTF-8 without BOM.
+* Add new line at end of files.
 
 ## 3. Comments
 
@@ -36,12 +38,12 @@ Clearfix: contain floats
 For modern browsers
 
 1. The space content is one way to avoid an Opera bug when the
-`contenteditable` attribute is included anywhere else in the document.
-Otherwise it causes space to appear at the top and bottom of elements
-that receive the `clearfix` class.
+   `contenteditable` attribute is included anywhere else in the document.
+   Otherwise it causes space to appear at the top and bottom of elements
+   that receive the `clearfix` class.
 
 2. The use of `table` rather than `block` is only necessary if using
-`:before` to contain the top-margins of child elements.
+   `:before` to contain the top-margins of child elements.
 */
 
 .clearfix:before,
@@ -75,7 +77,7 @@ The chosen code format must ensure that code is: easy to read; easy to clearly c
 * Include a single space before the opening brace of a ruleset.
 * Include one declaration per line in a declaration block.
 * Use one level of indentation for each declaration.
-* Indent vendor prefixed declarations so that their values are aligned.
+* Indent vendor prefixed declarations so that their values are aligned for easy multi-line editing.
 * Include a single space after the colon of a declaration.
 * Use lowercase and shorthand hex values, e.g., `#aaa`.
 * Use double quotes, e.g., `content: ""`.
@@ -203,7 +205,7 @@ For example, sometimes `border` can affect elements dimentions, sometimes not.
 
 ```css
 
-/* 1. Border-width affects dimmentions */
+/* 1. Border-width affects dimmentions because width is not «auto» */
 
 .sample-1 {
     /* Box-model */
@@ -215,9 +217,10 @@ For example, sometimes `border` can affect elements dimentions, sometimes not.
 
 /* 
 1. Border-width doesn't affects dimmentions,
-It's more visual than box-model
+   It's more visual rather than box-model
 
 2. Padding is no more affects dimmentions,
+   so it can be placed below width.
 */
 
 .sample-2 {
@@ -254,7 +257,67 @@ Another example, when typography definitions may apply for layouting:
 }
 
 ```
+## 6. Bad practice to avoid
 
-## 6. Selectors
+### Avoid undoing styles
 
-## 7. Naming conventions
+Any CSS declarations that unsets styles (apart from in a reset) are *typically* bad news. If you are having to remove borders, you probably applied them too early. Rulesets should only ever inherit and add to previous ones, never undo.
+
+Example:
+
+```css
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #ccc;
+}
+
+.blog-roll h2 {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+```
+
+That's means you added `border-bottom` to early. You should rewrite you code like this:
+
+```css
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+.page-headline {
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #ccc;
+}
+
+```
+
+
+### Avoid magic numbers 
+
+### Avoid hard-coded/absolute values
+
+### Avoid brute forcing
+
+### Avoid `!important`
+
+## 7. Writing selectors
+
+### Do not use IDs for styling
+
+### Do not use qualified selectors
+
+### Do not use dangerous selectors
+
+### Do not use loose class names
+
+### Keep your selectors as short as possible
+
+## 8. Naming conventions
+
+### `js-*` classes for javascript selectors
