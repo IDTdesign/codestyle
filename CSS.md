@@ -439,3 +439,7 @@ Use double hyphen «--» for elements that can exists only inside more complex c
 `.grid--item` is meaningless outside of a `.grid` tag. 
 
 ### `js-*` classes for javascript selectors
+
+### Content-independent class names
+
+### The “multi-class” pattern
