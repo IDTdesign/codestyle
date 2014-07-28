@@ -304,7 +304,25 @@ h2 {
 
 ### Avoid brute forcing
 
-### Avoid `!important`
+### Avoid `!important`. Hacking specificity
+
+Sometimes you need to increase specificity of some rule. Do not use `!important`, boost specificity of selector instead.
+
+You can chain a selector with itself to increase its specificity:
+
+```css
+.btn.btn { }
+```
+
+…will select based on only one class (.btn) but with double the specificity. We can take this as far as we need to:
+
+```css
+.btn.btn.btn.btn { }
+```
+
+We could also add another selector to the `.btn {}` ruleset, for example `.box .btn {}`, but this isn’t a very maintainable solution at all: it depends on a context. We can’t really keep on adding a new selector every time we need to bump up specificity.
+
+Chaining selector with itself boosts specificity with very little maintenance overhead, and no reliance on a location or context. But this still a hack.
 
 ## 7. Writing selectors
 
