@@ -328,6 +328,31 @@ Chaining selector with itself boosts specificity with very little maintenance ov
 
 ### Do not use IDs for styling
 
+Let’s imagine you have this third-party widget embedded on your page, and you want to style it:
+
+```html
+<div id="widget">
+    ...
+</div>
+```
+
+Naturally, given that we can’t edit this HTML to use a class instead of (or alongside) the ID, we’d opt for something like this:
+
+```css
+#widget {
+    ...
+}
+```
+Now we have an ID in our CSS with very hight specificity. Instead, we should do something like this:
+
+```css
+[id="widget"] {
+    ...
+}
+```
+
+This selector has the exact same specificity as a class, so we’re selecting a chunk of the DOM based on an ID, but never actually increasing our specificity beyond that of our classes.
+
 ### Do not use qualified selectors
 
 ### Do not use dangerous selectors
