@@ -326,7 +326,11 @@ Chaining selector with itself boosts specificity with very little maintenance ov
 
 ## 7. Writing selectors
 
+In short: **never use a selector more specific than the one you need**.
+
 ### Do not use IDs for styling
+
+They have no advantage over classes (anything you can do with an ID, you can do with a class), they cannot be reused, and their specificity is too high. Even an infinite number of chained classes will not trump the specificity of one ID.
 
 Let’s imagine you have this third-party widget embedded on your page, and you want to style it:
 
@@ -355,11 +359,15 @@ This selector has the exact same specificity as a class, so we’re selecting a 
 
 ### Do not use qualified selectors
 
+Do not qualify selectors unless you have a compelling reason to do so. If `.nav {}` will work, do not use `ul.nav {}`; to do so would not only limit the places you can use the `.nav` class, but it also increases the specificity of the selector, again, with no real gain.
+
 ### Do not use dangerous selectors
 
 ### Do not use loose class names
 
 ### Keep your selectors as short as possible
+
+Do not nest selectors unnecessarily. If `.header-nav {}` will work, never use `.header .header-nav {}`; to do so will literally double the specificity of the selector without any benefit.
 
 ## 8. Naming conventions
 
