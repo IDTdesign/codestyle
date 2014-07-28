@@ -320,4 +320,71 @@ h2 {
 
 ## 8. Naming conventions
 
+### Root modules
+
+For root module prefer solid single world class-names without hyphens between words:  
+  `.pageheader` better than `.page-header`;  
+  `.topnav` better than `.top-nav`.
+
+**Why?**
+
+* Easier to select whole word on double-click,
+* Visually not mixed with sub-modules or modifiers
+
+**Exclusions**
+
+Use hyphen when class name is too long or double-meaning appears (to improve readability).
+
+### States or Modifiers
+
+Use single hyphen «-» as a separator between module name and its state or modifier:  
+`.btn` and `.btn-large`, `.btn-primary`, `.dropdown-is-opened`, `.menuitem-is-active`. 
+
+Do not use state or modifier name without module prefix.
+
+`<div class="btn large">...` — is bad.  
+`<div class="btn btn-large">...` — is good.
+
+### Sub-modules
+
+Use single hyphen «-» as a separator between module name and sub-module name:
+
+```css
+.panel {...}
+.panel-header {...}
+.panel-body {...}
+.panel-actions {...}
+
+.menu {...}
+.menu-link {...}
+.menu-icon {...}
+.menu-dropdown {...}
+```
+
+Sub-modules above have no strict dependence from root class. They can be used inside wrappers or other sub-modules.
+
+
+Use double hyphen «--» for elements that can exists only inside more complex constructions (parent class required). For example:
+
+```html
+<ul class="grid-justified">
+ <li class="grid--item"></li>
+ <li class="grid--item"></li>
+ <li class="grid--item"></li>
+</ul>
+```
+
+```css
+.grid-justified {
+	display: table;
+	table-layout: fixed;
+}
+
+.grid-justified > .grid--item {
+	display: table-cell;
+}
+```
+ 
+`.grid--item` is meaningless outside of a `.grid` tag. 
+
 ### `js-*` classes for javascript selectors
