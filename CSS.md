@@ -155,7 +155,8 @@ When using nested selectors follow the rules:
 
 Example:
 
-```
+```less
+
 .product--name {
     position: relative;
     margin: .5em 0 0;
@@ -179,6 +180,7 @@ Example:
         }
     }
 }
+
 ```
 
 ## 6. Declaration order
