@@ -24,6 +24,12 @@ This document defines formatting and style rules for CSS. It aims at improving c
 * Keep line-length to a sensible maximum, e.g., 80 columns.
 * Place only short comments after a declaration. If comment is too long use shortcuts and place the comment above ruleset
 
+Reasons for limit width to 80 characters width:
+
+* the ability to have multiple files open side by side;
+* viewing CSS on sites like GitHub, or in terminal windows;
+* providing a comfortable line length for comments.
+
 ```css
 
 /* Allow only vertical resizing of textareas. */
@@ -76,6 +82,9 @@ The chosen code format must ensure that code is: easy to read; easy to clearly c
 * Use one discrete selector per line in multi-selector rulesets.
 * Include a single space before the opening brace of a ruleset.
 * Include one declaration per line in a declaration block.
+* The opening brace (`{`) on the same line as our last selector.
+* Our first declaration on a new line after our opening brace (`{`).
+* Our closing brace (`}`) on its own new line.
 * Use one level of indentation for each declaration.
 * Indent vendor prefixed declarations so that their values are aligned for easy multi-line editing.
 * Include a single space after the colon of a declaration.
@@ -121,13 +130,19 @@ Large blocks of repetitive declarations can use a slightly different, single-lin
     background: url("ico-accout-sprite.png") top left no-repeat;
 }
 
-.ico-hint    { width:20px; height:17px; background-position:0 0; }
-.ico-notify  { width:39px; height:39px; background-position:0 -17px; }
-.ico-warning { width:31px; height:29px; background-position:0 -56px; }
-.ico-print   { width:13px; height:15px; background-position:0 -85px; }
+.ico-hint    { width:20px; height:17px; background-position:0    0; }
+.ico-notify  { width:39px; height:39px; background-position:0  -17px; }
+.ico-warning { width:31px; height:29px; background-position:0  -56px; }
+.ico-print   { width:13px; height:15px; background-position:0  -85px; }
 .ico-logout  { width:14px; height:20px; background-position:0 -100px; }
 
 ```
+
+These types of ruleset benefit from being single-lined because
+
+* they still conform to the one-reason-to-change-per-line rule;
+* they share enough similarities that they don’t need to be read as thoroughly as other rulesets—there is more benefit in being able to scan their selectors, which are of more interest to us in these cases.
+
 
 Long, comma-separated property values — such as collections of gradients or shadows — can be arranged across multiple lines in an effort to improve readability and produce more useful diffs. There are various formats that could be used; one example is shown below.
 
@@ -142,15 +157,17 @@ Long, comma-separated property values — such as collections of gradients or sh
         2px 2px 1px 1px #ccc inset;
 }
 
+This makes life a little easier for developers whose text editors support column editing, allowing them to change several identical and aligned lines in one go.
+
 ```
 
-## 5. LESS notation
+## 5. Less / Sass notation
 
 When using nested selectors follow the rules:
 
 * Indent each nested selector or @-rule with 4 spaces
 * Seperate each rule by a blank line
-* Don't use blank lines between multiple closing brackets `}`
+* Don't use blank lines between multiple closing brace (`}`)
 
 
 Example:
@@ -182,6 +199,9 @@ Example:
 }
 
 ```
+
+Nesting in Less / Sass should be avoided wherever possible because of specifity problem.
+
 
 ## 6. Declaration order
 
@@ -284,13 +304,12 @@ Another example, when typography definitions may apply for layouting:
 ```css
 
 /* 1. Text-align used for layouting inner elements */
+/* 2. Vertical-align affects layout, so it is box-model definition, not typography */
 
 .sample-3-outer {
     display: block;
     text-align: justify; /* 1 */
 }
-
-/* 2. Vertical-align affects layout, so it is box-model definition, not typography */
 
 .sample-3-inner {
     display: inline-block;
@@ -340,6 +359,32 @@ h2 {
 
 
 ### Avoid magic numbers 
+
+A magic number is a value that is used ‘because it just works’. Take the following example:
+
+```css
+
+.site-nav {
+    /*styles*/
+}
+
+.site-nav > li:hover .dropdown {
+    position: absolute;
+    top: 37px;
+    left: 0;
+}
+
+```
+
+`top: 37px;` — is a magic number. It works only because `li` inside `.site-nav` happen to be 37px tall, and the `.dropdown` flyout menu needs to appear at the bottom of it.
+
+If someone changes the `font-size` in `.site-nav` and now everything become 29px tall, this number is no longer valid and the next dev needs to know to update it. In that example should be `top: 100%` instead 37px.
+
+If you had a more complex example which used a magic number —and that magic number became invalid— you are faced with one or more of the following problems:
+
+* The next dev doesn’t know where the magic number came from, so they delete it and are back at square one.
+* The next dev is a cautious dev who, because he doesn’t know where the magic number came from, decides to try and fix the problem without touching that magic number. This means that an old, outdated, hacky magic number stays in the code, and the next dev simply hacks away on top of it. You are now hacking on top of a hack.
+
 
 ### Avoid hard-coded/absolute values
 
