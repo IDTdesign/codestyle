@@ -144,7 +144,44 @@ Long, comma-separated property values — such as collections of gradients or sh
 
 ```
 
-## 5. Declaration order
+## 5. LESS notation
+
+When using nested selectors follow the rules:
+
+* Indent each nested selector or @-rule with 4 spaces
+* Seperate each rule by a blank line
+* Don't use blank lines between multiple closing brackets `}`
+
+
+Example:
+
+```
+.product--name {
+    position: relative;
+    margin: .5em 0 0;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    sup {
+        position: absolute;
+        top: .3em;
+        margin-left: .2em;
+        font-size: 1em;
+    }
+
+    @media (min-width: 640px) {
+        margin-top: -1.75em;
+
+        span {
+            padding: 0 0.5em;
+            background-color: #fff;
+        }
+    }
+}
+```
+
+## 6. Declaration order
 
 Related property declarations should be grouped together following the order:
 
@@ -154,7 +191,9 @@ Related property declarations should be grouped together following the order:
 4. Visual
 5. ...
 
-Positioning comes first because it can remove an element from the normal flow of the document and override box model related styles. The box model comes next as it dictates a component's dimensions and placement. Definitions in box model section ordered from outer to inner, e.g. `margin — border — padding — width/height`.
+Positioning comes first because it can remove an element from the normal flow of the document and override box model related styles. The box model comes next as it dictates a component's dimensions and placement. Definitions in box model section ordered from outer to inner, e.g. `margin → border → padding → width/height`.
+
+If you are using global `box-sizing: border-box` then definitions should stick to that order `margin → width/height → border → padding`.
 
 Everything else takes place inside the component or without impacting the previous two sections, and thus they come last.
 
@@ -257,7 +296,7 @@ Another example, when typography definitions may apply for layouting:
 }
 
 ```
-## 6. Bad practice to avoid
+## 7. Bad practice to avoid
 
 ### Avoid undoing styles
 
@@ -324,7 +363,7 @@ We could also add another selector to the `.btn {}` ruleset, for example `.box .
 
 Chaining selector with itself boosts specificity with very little maintenance overhead, and no reliance on a location or context. But this still a hack.
 
-## 7. Writing selectors
+## 8. Writing selectors
 
 In short: **never use a selector more specific than the one you need**.
 
