@@ -165,9 +165,9 @@ This makes life a little easier for developers whose text editors support column
 
 When using nested selectors follow the rules:
 
-* Indent each nested selector or @-rule with 4 spaces
-* Seperate each rule by a blank line
-* Don't use blank lines between multiple closing brace (`}`)
+* Indent each nested selector or @-rule with 4 spaces.
+* Seperate each rule by a blank line.
+* Don't use blank lines between multiple closing brace (`}`).
 
 
 Example:
@@ -702,8 +702,6 @@ Name things for people; they’re the only things that actually _read_ your clas
     color: blue;
 }
 ```
-
-**Describe use cases not styles and content**
 
 It is important to strike a balance between names that do not literally describe the style that the class brings, but also ones that do not explicitly describe specific use cases.
 
