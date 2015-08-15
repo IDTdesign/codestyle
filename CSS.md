@@ -157,9 +157,9 @@ Long, comma-separated property values — such as collections of gradients or sh
         2px 2px 1px 1px #ccc inset;
 }
 
-This makes life a little easier for developers whose text editors support column editing, allowing them to change several identical and aligned lines in one go.
-
 ```
+
+This makes life a little easier for developers whose text editors support column editing, allowing them to change several identical and aligned lines in one go.
 
 ## 5. Less / Sass notation
 
