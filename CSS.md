@@ -3,6 +3,37 @@ CSS coding style
 
 This document defines formatting and style rules for CSS. It aims at improving collaboration, code quality, and enabling supporting infrastructure.
 
+1. **[General principles](#1-general-principles)**
+2. **[Whitespace](#2-whitespace)**
+3. **[Comments](#3-comments)**
+4. **[Format](#4-format)**
+    * [Anatomy of rulesets](#anatomy-of-rulesets)
+    * [Exceptions and slight deviations](#exceptions-and-slight-deviations)
+5. **[Less / Sass notation](#5-less--sass-notation)**
+6. **[Declaration order](#6-declaration-order)**
+    * [Exceptions and slight deviations](#exceptions-and-slight-deviations-1)
+7. **[Bad practice to avoid](#7-bad-practice-to-avoid)**
+    * [Avoid undoing styles](#avoid-undoing-styles)
+    * [Avoid magic numbers](#avoid-magic-numbers)
+    * [Avoid hard-coded/absolute values](#avoid-hard-codedabsolute-values)
+    * [Avoid brute forcing](#avoid-brute-forcing)
+    * [Avoid !important. Hacking specificity](#avoid-important-hacking-specificity)
+8. **[Writing selectors](#8-writing-selectors)**
+    * [Do not use IDs for styling](#do-not-use-ids-for-styling)
+    * [Do not use qualified selectors](#do-not-use-qualified-selectors)
+    * [Do not use dangerous selectors](#do-not-use-dangerous-selectors)
+    * [Do not use loose class names](#do-not-use-loose-class-names)
+    * [Keep your selectors as short as possible](#keep-your-selectors-as-short-as-possible)
+9. **[Naming conventions](#9-naming-conventions)**
+    * [Root modules](#root-modules)
+    * [States or Modifiers](#states-or-modifiers)
+    * [Sub-modules](#sub-modules)
+    * [js-* classes for javascript selectors](#js--classes-for-javascript-selectors)
+    * [is-* prefix for state names](#is--prefix-for-state-names)
+    * [Content-independent class names](#content-independent-class-names)
+    * [The “multi-class” pattern](#the-multi-class-pattern)
+10. **[General rules about writing CSS selectors](#10-general-rules-about-writing-css-selectors)**
+
 ## 1. General principles
 
 * Don't try to prematurely optimize your code; keep it readable and understandable.
