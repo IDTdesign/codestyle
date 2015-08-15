@@ -358,7 +358,7 @@ h2 {
 ```
 
 
-### Avoid magic numbers 
+### Avoid magic numbers
 
 A magic number is a value that is used ‘because it just works’. Take the following example:
 
@@ -388,7 +388,34 @@ If you had a more complex example which used a magic number —and that magic nu
 
 ### Avoid hard-coded/absolute values
 
+Not unlike magic numbers, hard-coded values are also bad news. A hard-coded value might be something like this:
+
+```css
+
+h1 {
+    font-size: 24px;
+    line-height: 32px;
+}
+
+```
+
+`line-height: 32px;` here is not cool, it should be `line-height: 1.333…`. If you ever change the `font-size` of a `h1`, you want to know that your `line-height` will track it.
+
 ### Avoid brute forcing
+
+This one is in a similar vein to hard-coded numbers, but a little more specific. Brute forcing CSS is when you use hard-coded magic numbers and a variety of other techniques to force a layout to work. Take for example:
+
+```css
+
+.foo {
+    margin-left: -3px;
+    position: relative;
+    z-index: 99999;
+    height: 59px;
+    float: left;
+}
+
+```
 
 ### Avoid `!important`. Hacking specificity
 
