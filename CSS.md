@@ -476,6 +476,23 @@ Do not qualify selectors unless you have a compelling reason to do so. If `.nav 
 
 ### Do not use dangerous selectors
 
+A ‘dangerous selector’ is one with far too broad a reach.
+
+```css
+
+header {
+    padding: 1em;
+    background-color: #BADA55;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+```
+
+The `header` element **does not** mean ‘your site’s main header’ and, as per the spec, the header element can be used multiple times in multiple contexts. This should be targeted via a selector more like `.site-header {}`, for example.
+
+To give such specific styling to such a generic selector is dangerous. Your styles will leak out into areas they shouldn’t as soon as you start trying to use that element again, and you’ll need to start undoing styles (adding more code to take styles away) in order to combat this.
+
 ### Do not use loose class names
 
 ### Keep your selectors as short as possible
