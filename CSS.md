@@ -474,6 +474,33 @@ This selector has the exact same specificity as a class, so we’re selecting a 
 
 Do not qualify selectors unless you have a compelling reason to do so. If `.nav {}` will work, do not use `ul.nav {}`; to do so would not only limit the places you can use the `.nav` class, but it also increases the specificity of the selector, again, with no real gain.
 
+More extreme examples might be:
+
+```css
+
+ul.nav li.active a {}
+div.header a.logo img {}
+.content ul.features a.button {}
+
+```
+
+All of these selectors can be trimmed down massively, or totally rewritten, to:
+
+```css
+
+.nav .active a {}
+.logo > img  {}
+.features-button {}
+
+```
+
+Which will help us:
+
+* Save actual amounts of code
+* Increase performance
+* Allow greater portability
+* Reduce specificity
+
 ### Do not use dangerous selectors
 
 A ‘dangerous selector’ is one with far too broad a reach.
@@ -494,6 +521,34 @@ The `header` element **does not** mean ‘your site’s main header’ and, as p
 To give such specific styling to such a generic selector is dangerous. Your styles will leak out into areas they shouldn’t as soon as you start trying to use that element again, and you’ll need to start undoing styles (adding more code to take styles away) in order to combat this.
 
 ### Do not use loose class names
+
+A ‘loose’ class name is one that isn’t specific enough for its intended purpose. Imagine a class of `.card`. What does this do?
+
+This class name is very loose, and loose class names are very bad for two main reasons:
+
+* You can’t necessarily glean its purpose from the class alone.
+* It’s so vague that it could very easily be redefined accidentally by another dev.
+
+Some examples:
+
+```
+.card   →  .credit-card-image
+
+.header →  .page-header
+           .article-header
+           .section-header
+           .widget-header
+           
+.content → .user-generated-content
+           .article-content
+           .comment-content
+           .widget-content
+           
+.right  →  .right-aligned-img
+           .text-right
+           .float-right
+           
+```
 
 ### Keep your selectors as short as possible
 
@@ -519,7 +574,7 @@ Use hyphen when class name is too long or double-meaning appears (to improve rea
 ### States or Modifiers
 
 Use single hyphen «-» as a separator between module name and its state or modifier:  
-`.btn` and `.btn-large`, `.btn-primary`, `.dropdown-is-opened`, `.menuitem-is-active`. 
+`.btn` and `.btn-large`, `.btn-primary`.
 
 Do not use state or modifier name without module prefix.
 
@@ -548,7 +603,7 @@ Sub-modules above have no strict dependence from root class. They can be used in
 Use double hyphen «--» for elements that can exists only inside more complex constructions (parent class required). For example:
 
 ```html
-<ul class="grid-justified">
+<ul class="grid grid-justified">
  <li class="grid--item"></li>
  <li class="grid--item"></li>
  <li class="grid--item"></li>
@@ -565,10 +620,12 @@ Use double hyphen «--» for elements that can exists only inside more complex c
 	display: table-cell;
 }
 ```
- 
-`.grid--item` is meaningless outside of a `.grid` tag. 
+
+`.grid--item` is meaningless outside of a `.grid` tag.
 
 ### `js-*` classes for javascript selectors
+
+### `is-*` prefix for state names
 
 ### Content-independent class names
 
