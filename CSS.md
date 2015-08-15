@@ -554,7 +554,7 @@ Some examples:
 
 Do not nest selectors unnecessarily. If `.header-nav {}` will work, never use `.header .header-nav {}`; to do so will literally double the specificity of the selector without any benefit.
 
-## 8. Naming conventions
+## 9. Naming conventions
 
 ### Root modules
 
@@ -625,8 +625,141 @@ Use double hyphen «--» for elements that can exists only inside more complex c
 
 ### `js-*` classes for javascript selectors
 
+As a rule, it is unwise to bind your CSS and your JS onto the same class in your HTML. This is because doing so means you can’t have (or remove) one without (removing) the other. It is much cleaner, much more transparent, and much more maintainable to bind your JS onto specific classes.
+
+Typically, these are classes that are prepended with `js-`, for example:
+
+```html
+<input type="submit" class="btn  js-btn" value="Follow" />
+```
+
+This means that we can have an element elsewhere which can carry with style of `.btn {}`, but without the behaviour of `.js-btn`.
+
+**`data-*` Attributes**
+
+A common practice is to use `data-*` attributes as JS hooks, but this is incorrect. `data-*` attributes, as per the spec, are used to store custom data private to the page or application. `data-*` attributes are designed to store data, not be bound to.
+
 ### `is-*` prefix for state names
+
+While `js-*` prefix is used to bind JS, usually we need to change state of an element dynamically. Use `is-*` prefix for that: `.is-active`, `.is-opened`, `.is-closed`, `.is-expanded`, `is-collapsed` ect.
+
+But don't apply styles directly to that classes. Use multi-class pattern instead: chain state class with module class.
+
+```css
+
+.menu-item.is-active { ... }
+
+.dropdown.is-opened { ... }
+
+.aside-menu.is-expanded .aside-ads { ... }
+
+```
 
 ### Content-independent class names
 
+Aim for high reusability when naming things.
+
+Tying your class name semantics tightly to the nature of the content has already reduced the ability of your architecture to scale or be easily put to use by other developers.
+
+```
+.site-nav → .primary-nav
+
+.footer-links → .sub-links
+
+.news-header → .section-header
+
+.btn-login → .btn-primary
+```
+
+Name things for people; they’re the only things that actually _read_ your classes (everything else merely matches them). Once again, it is better to strive for reusable, recyclable classes rather than writing for specific use cases. Let’s take an example:
+
+```css
+/**
+ * Runs the risk of becoming out of date; not very maintainable.
+ */
+.blue {
+    color: blue;
+}
+
+/**
+ * Depends on location in order to be rendered properly.
+ */
+.header span {
+    color: blue;
+}
+
+/**
+ * Too specific; limits our ability to reuse.
+ */
+.header-color {
+    color: blue;
+}
+
+/**
+ * Nicely abstracted, very portable, doesn’t risk becoming out of date.
+ */
+.highlight-color {
+    color: blue;
+}
+```
+
+**Describe use cases not styles and content**
+
+It is important to strike a balance between names that do not literally describe the style that the class brings, but also ones that do not explicitly describe specific use cases.
+
 ### The “multi-class” pattern
+
+Components often have variants with slightly different presentations from the base component, e.g., a different coloured background or border. There are two mains patterns used to create these component variants.
+
+**The “single-class” pattern**
+
+```css
+.btn,
+.btn-primary { /* button template styles */ }
+
+.btn-primary { /* styles specific to primary button */ }
+```
+
+```html
+<button class="btn">Default</button>
+<button class="btn-primary">Login</button>
+```
+
+**The “multi-class” pattern**
+
+```css
+.btn { /* button template styles */ }
+.btn-primary { /* styles specific to primary button */ }
+```
+
+```html
+<button class="btn">Default</button>
+<button class="btn btn-primary">Login</button>
+```
+
+“Multi-class” is more scalable pattern. For example, take the base `btn` component and add a further 5 types of button and 3 additional sizes. Using a “multi-class” pattern you end up with 9 classes that can be mixed-and-matched. Using a “single-class” pattern you end up with 24 classes.
+
+It is also easier to make contextual tweaks to a component, if absolutely necessary. You might want to make small adjustments to any `btn` that appears within another component.
+
+```css
+/* "multi-class" adjustment */
+.thing .btn { /* adjustments */ }
+
+/* "single-class" adjustment */
+.thing .btn,
+.thing .btn-primary,
+.thing .btn-danger,
+.thing .btn-etc { /* adjustments */ }
+```
+
+A “multi-class” pattern means you only need a single intra-component selector to target any type of `btn`-styled element within the component. A “single-class” pattern would mean that you may have to account for any possible button type, and adjust the selector whenever a new button variant is created.
+
+## 10. General rules about writing CSS selectors
+
+* **Select what you want explicitly**, rather than relying on circumstance or coincidence. Good Selector Intent will rein in the reach and leak of your styles.
+* **Write selectors for reusability**, so that you can work more efficiently and reduce waste and repetition.
+* **Do not nest selectors unnecessarily**, because this will increase specificity and affect where else you can use your styles.
+* **Do not qualify selectors unnecessarily**, as this will impact the number of different elements you can apply styles to.
+* **Keep selectors as short as possible**, in order to keep specificity down and performance up.
+
+Focussing on these points will keep your selectors a lot more sane and easy to work with on changing and long-running projects.
