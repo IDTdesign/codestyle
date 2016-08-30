@@ -357,6 +357,7 @@ Any CSS declarations that unsets styles (apart from in a reset) are *typically* 
 Example:
 
 ```css
+/* this is an example of bad practice. don't copy it  */
 
 h2 {
     font-size: 2em;
@@ -394,6 +395,7 @@ h2 {
 A magic number is a value that is used ‘because it just works’. Take the following example:
 
 ```css
+/* this is an example of bad practice. don't copy it  */
 
 .site-nav {
     /*styles*/
@@ -422,6 +424,7 @@ If you had a more complex example which used a magic number —and that magic nu
 Not unlike magic numbers, hard-coded values are also bad news. A hard-coded value might be something like this:
 
 ```css
+/* this is an example of bad practice. don't copy it  */
 
 h1 {
     font-size: 24px;
@@ -437,6 +440,7 @@ h1 {
 This one is in a similar vein to hard-coded numbers, but a little more specific. Brute forcing CSS is when you use hard-coded magic numbers and a variety of other techniques to force a layout to work. Take for example:
 
 ```css
+/* this is an example of bad practice. don't copy it  */
 
 .foo {
     margin-left: -3px;
@@ -508,6 +512,7 @@ Do not qualify selectors unless you have a compelling reason to do so. If `.nav 
 More extreme examples might be:
 
 ```css
+/* this is an example of bad practice. don't copy it  */
 
 ul.nav li.active a {}
 div.header a.logo img {}
@@ -537,6 +542,7 @@ Which will help us:
 A ‘dangerous selector’ is one with far too broad a reach.
 
 ```css
+/* this is an example of bad practice. don't copy it  */
 
 header {
     padding: 1em;
