@@ -9,5 +9,5 @@
 
 ## Usage
 
-* Put [our default .editorconfig](.editorconfig) into the root folder
+* Put [our default .editorconfig](https://github.com/IDTdesign/codestyle/blob/master/.editorconfig) into the root folder
 * [Download a plugin](http://editorconfig.org#download) for your IDE
