@@ -1,0 +1,9 @@
+title: Codestyle
+author: IDTdesign
+email: pavel.radzkov@idt.net
+description: > # this means to ignore newlines until next line
+  CSS / HTML coding style guide
+github_username: IDTdesign
+google_tag_manager: GTM-5QDFXXC # default IDTdesign GMT id
+github_link: https://github.com/IDTdesign/codestyle
+remote_theme: IDTdesign/template
